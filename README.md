@@ -13,17 +13,7 @@ and make sure you run in sequence:
 7. Please change a temp to prove that the changes that occur in wokwi will be changes on other platforms
 
 Thanks 
-Btw i used library version :
-; PlatformIO Project Configuration File
-;
-;   Build options: build flags, source filter
-;   Upload options: custom upload port, speed and extra flags
-;   Library options: dependencies, extra library storages
-;   Advanced options: extra scripting
-;
-; Please visit documentation for the other options and examples
-; https://docs.platformio.org/page/projectconf.html
-
+Btw i used **library version** :
 [env:esp32doit-devkit-v1]
 platform = espressif32
 board = esp32doit-devkit-v1
@@ -32,4 +22,15 @@ lib_deps =
 	marcoschwartz/LiquidCrystal_I2C@^1.1.4
 	knolleary/PubSubClient@^2.8
 	beegee-tokyo/DHT sensor library for ESPx@^1.19
+	
+**PlatformIO Project Configuration File**
+Build options: build flags, source filter
+Upload options: custom upload port, speed and extra flags
+Library options: dependencies, extra library storages
+Advanced options: extra scripting
+
+Please visit documentation for the other options and examples
+https://docs.platformio.org/page/projectconf.html
+
+
 
