@@ -14,14 +14,14 @@ and make sure you run in sequence:
 
 Thanks 
 Btw i used **library version** :
-[env:esp32doit-devkit-v1]
-platform = espressif32
-board = esp32doit-devkit-v1
-framework = arduino
-lib_deps = 
-	marcoschwartz/LiquidCrystal_I2C@^1.1.4
-	knolleary/PubSubClient@^2.8
-	beegee-tokyo/DHT sensor library for ESPx@^1.19
+- [env:esp32doit-devkit-v1]
+- platform = espressif32
+- board = esp32doit-devkit-v1
+- framework = arduino
+- lib_deps = 
+	1. marcoschwartz/LiquidCrystal_I2C@^1.1.4
+	2. knolleary/PubSubClient@^2.8
+	3. beegee-tokyo/DHT sensor library for ESPx@^1.19
 	
 **PlatformIO Project Configuration File**
 Build options: build flags, source filter
@@ -31,6 +31,5 @@ Advanced options: extra scripting
 
 Please visit documentation for the other options and examples
 https://docs.platformio.org/page/projectconf.html
-
-
+and other official documentation
 
