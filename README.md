@@ -1,6 +1,6 @@
 # Temperature-Monitoring-ESP32-with-Node-red-and-Hive-MQ
 We have some project from my campus laboratory and we get some logical function from node red how to decide whether the temp is cold, normal or hot
-We used a plugins VS Code with Wokwi Simulator and Platform IO to simulate this project.
+We used a plugins VS Code with Wokwi Simulator and Platform IO to simulate this project. File FINAL MOBCOM IoT Simulation.json please import to your Node Red Configuration, if your have "uknown ui_gauage" or etc, you must delete that node and manually add the node, please check my reference PDF Presention to have a overview with my project.
 
 Note please : the MQTT_SERVER, MQTT_PORT, MQTT_USER, MQTT_PASS please change by your own "Overview", "Access Management" to get your Credentials "MQTT_USER" & "MQTT_PASS" 
 and make sure you run in sequence:
