@@ -1,0 +1,516 @@
+[
+    {
+        "id": "8e74ba49dc4b5b9a",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "10221606b7c9d89c",
+        "type": "mqtt in",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "",
+        "topic": "team1/weather",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "mqtt_hivemq_cloud",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 280,
+        "y": 240,
+        "wires": [
+            [
+                "a3a8d617bf5051ba",
+                "ae90eb7fcc3df86f",
+                "5e28468a2014f29b",
+                "e53b293a5309c31c"
+            ]
+        ]
+    },
+    {
+        "id": "d29d388565de3412",
+        "type": "mqtt in",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "",
+        "topic": "team1/wifi",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "mqtt_hivemq_cloud",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 460,
+        "wires": [
+            [
+                "4e0eeb3ba8a12408",
+                "3f3694bdb4e1aa18",
+                "1f31d59b7a464f3a"
+            ]
+        ]
+    },
+    {
+        "id": "a3a8d617bf5051ba",
+        "type": "debug",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "RAW MQTT WEATHER",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e53b293a5309c31c",
+        "type": "function",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "Logika Suhu",
+        "func": "let t = msg.payload.temperature;\nlet h = msg.payload.humidity;\nlet kondisi = \"\";\n\nif (t > 30) kondisi = \"PANAS\";\nelse if (t >= 25 && t <= 29) kondisi = \"NORMAL\";\nelse kondisi = \"DINGIN\";\n\nmsg.payload = kondisi;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "c5c3e42d2c11308c",
+                "d8f71089819fb58d",
+                "5232e1354f2bbf38"
+            ]
+        ]
+    },
+    {
+        "id": "c5c3e42d2c11308c",
+        "type": "ui-text",
+        "z": "8e74ba49dc4b5b9a",
+        "group": "b7a9dd99387ed640",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Status Suhu",
+        "label": "Status Suhu :",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 670,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4e0eeb3ba8a12408",
+        "type": "debug",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "RAW MQTT WIFI STATUS",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1f31d59b7a464f3a",
+        "type": "ui-text",
+        "z": "8e74ba49dc4b5b9a",
+        "group": "afaa0ec948904b7c",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "WIFI",
+        "label": "Status : WIFI",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 510,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ae90eb7fcc3df86f",
+        "type": "ui-gauge",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "Suhu",
+        "group": "75a003feed85f4e5",
+        "order": 1,
+        "value": "payload.temperature",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Suhu",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "C",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "-20",
+                "color": "#5c70d6",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "26",
+                "color": "#00ff11",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "85",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-20",
+        "max": "85",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 510,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e28468a2014f29b",
+        "type": "ui-gauge",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "Kelembapan",
+        "group": "75a003feed85f4e5",
+        "order": 2,
+        "value": "payload.humidity",
+        "valueType": "msg",
+        "width": "3",
+        "height": "3",
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Kelembapan",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5c70d6",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "26",
+                "color": "#00ff11",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "100",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "0",
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 530,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f3694bdb4e1aa18",
+        "type": "json",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8f71089819fb58d",
+        "type": "mqtt out",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "",
+        "topic": "team1/weather/status",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "mqtt_hivemq_cloud",
+        "x": 720,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5232e1354f2bbf38",
+        "type": "debug",
+        "z": "8e74ba49dc4b5b9a",
+        "name": "RAW MQTT OUT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "mqtt_hivemq_cloud",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Secure",
+        "broker": "d004eb1356264ae999a6524da6cbd5da.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "tls_hivemq",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b7a9dd99387ed640",
+        "type": "ui-group",
+        "name": "STATUS SUHU",
+        "page": "da54f8758145885d",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "afaa0ec948904b7c",
+        "type": "ui-group",
+        "name": "Status WIFI",
+        "page": "e48dafc79c615ffe",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "75a003feed85f4e5",
+        "type": "ui-group",
+        "name": "Nilai",
+        "page": "da54f8758145885d",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "tls_hivemq",
+        "type": "tls-config",
+        "name": "TLS HiveMQ",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "da54f8758145885d",
+        "type": "ui-page",
+        "name": "DHT22",
+        "ui": "3d742dbeda4ddbcc",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "ecb396bf8bd611df",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "e48dafc79c615ffe",
+        "type": "ui-page",
+        "name": "Connection WIFI",
+        "ui": "3d742dbeda4ddbcc",
+        "path": "/page3",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "ecb396bf8bd611df",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "3d742dbeda4ddbcc",
+        "type": "ui-base",
+        "name": "[DHT 22]",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": false,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "ecb396bf8bd611df",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "068e20c5d95d65d0",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.29.0"
+        }
+    }
+]
